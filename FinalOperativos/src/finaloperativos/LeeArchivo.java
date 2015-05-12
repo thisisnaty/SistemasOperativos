@@ -1,7 +1,6 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
+    Aqui se lee el archivo, se valida la instruccion y se llama 
+    al metodo necesario dentro de la clase procedimiento.
 */
 package finaloperativos;
 

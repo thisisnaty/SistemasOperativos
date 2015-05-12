@@ -33,12 +33,25 @@ public class Procedimiento extends FinalOperativos{
     }
     
 
-    public void liberar(int id, Conjunto con){
+    public void liberar(int id, Conjunto con, LinkedList<proceso> listaProcesos){
         
-        // para el reloj
+        // Variable que guarda el tiempo de llegada del proceso
+        Calendar llegada = null;
+        
+        // Variable que guarda el tiempo actual
         Calendar actual = Calendar.getInstance();
         actual.getTime();
-        long turnarround = (future.getTimeInMillis() - actual.getTimeInMillis());
+        
+        // Obtiene el tiempo de llegada del proceso
+        for(Object objProceso: listaProcesos) {
+            Proceso p = (Proceso) objProceso;
+            if (p.getId() == id) {
+                llegada = p.getTiempoLlegada();
+            }
+        }
+        
+        // Calcula el turnarround
+        long turnarround = (llegada.getTimeInMillis() - actual.getTimeInMillis());
         
         // Checa las primeras 2048 localidades de memoria
         // Principal y secundaria y borra el ID si es del

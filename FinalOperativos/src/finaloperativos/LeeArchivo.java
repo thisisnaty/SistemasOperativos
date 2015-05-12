@@ -23,12 +23,17 @@ public class LeeArchivo {
     Scanner scan;
     Scanner scan2;
     LinkedList<Proceso> lklProcesos;
+    int pId;
+    int pTam;
+    
     
     public LeeArchivo (String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
         scan = null;
         scan2 = null;
         lklProcesos = new LinkedList();
+        pId = -1;
+        pTam = -1;
     }
     
     void leer() throws FileNotFoundException, IOException{
@@ -52,9 +57,9 @@ public class LeeArchivo {
                 word = scan2.next();
                 
                 if (word.equals("P")) {
-                    if (checaP(word, line))
-                        //p tamaño id
-                        proceso(line);
+                    if (checaP(word, line)) {
+                        Proceso p = new Proceso(pId, pTam);
+                    }
                 }
                 
                 
@@ -87,9 +92,8 @@ public class LeeArchivo {
     boolean checaP(String word, String line) {
         word = scan2.next();
         boolean tamano = false;
-        int tam;
         try {
-            tam = Integer.parseInt(word);
+            pTam = Integer.parseInt(word);
             tamano = true;
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (tamaño)");
@@ -99,10 +103,9 @@ public class LeeArchivo {
         }
         if (tamano) {
             word = scan2.next();
-            int id;
             boolean numId = false;
             try {
-                id = Integer.parseInt(word);
+                pId = Integer.parseInt(word);
                 numId = true;
             } catch(NumberFormatException e) {
                 System.out.println("Operacion invalida, no es un numero (id)");

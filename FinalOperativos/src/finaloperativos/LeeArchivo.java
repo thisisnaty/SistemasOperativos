@@ -64,15 +64,17 @@ public class LeeArchivo {
                         }
                         break;
                     case "L":
-                        //L id
                         if (checaL()) {
-                        p.liberar(pId, con, lklProcesos);
+                            p.liberar(pId, con, lklProcesos);
                         }
                         break;
                     case "F":
                         //reporte
                         //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
-                        con = new Conjunto();
+                        if (line.equals("F")) {
+                            con = new Conjunto();
+                            //Reporte r = new Reporte();
+                        }
                         break;
                     case "E":
                         break;
@@ -101,15 +103,14 @@ public class LeeArchivo {
     boolean checaL() {
         String temp = line;
         if (temp.trim().split("\\s+").length != 2) {
+            System.out.println("Operacion invalida, faltan datos");
             return false;
         }
+        
         try {
             pId = Integer.parseInt(word[1]);
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");
-            return false;
-        } catch (NullPointerException e) {
-            System.out.println("Operacion invalida, falta un dato (direccion)");
             return false;
         }
         return true;
@@ -118,6 +119,7 @@ public class LeeArchivo {
     boolean checaA() {
         String temp = line;
         if (temp.trim().split("\\s+").length != 4) {
+            System.out.println("Operacion invalida, faltan datos");
             return false;
         }
         try {
@@ -125,18 +127,12 @@ public class LeeArchivo {
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");
             return false;
-        } catch (NullPointerException e) {
-            System.out.println("Operacion invalida, falta un dato (direccion)");
-            return false;
         }
         
         try {
             pId = Integer.parseInt(word[2]);
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");
-            return false;
-        } catch (NullPointerException e) {
-            System.out.println("Operacion invalida, falta un dato (direccion)");
             return false;
         }
         
@@ -153,9 +149,6 @@ public class LeeArchivo {
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");
             return false;
-        } catch (NullPointerException e) {
-            System.out.println("Operacion invalida, falta un dato (direccion)");
-            return false;
         }
         return true;
     }
@@ -163,6 +156,7 @@ public class LeeArchivo {
     boolean checaP() {
         String temp = line;
         if (temp.trim().split("\\s+").length != 3) {
+            System.out.println("Operacion invalida, faltan datos");
             return false;
         }
         try {

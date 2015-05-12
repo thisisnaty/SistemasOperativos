@@ -6,11 +6,20 @@
 
 package finaloperativos;
 
+import java.lang.reflect.Array;
+
 /**
  *
  * @author Enrique
  */
 public class Procedimiento {
+     
+    int[] memPrincipal = new int[2048];
+    int[] memSecundaria = new int[4096];
+    
+    public void procP(Proceso p){
+        
+    }
     
     public static void liberar(int id){
         for(int i = 0; i < 2048;i += 8 ){

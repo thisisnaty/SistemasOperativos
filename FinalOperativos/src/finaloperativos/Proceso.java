@@ -14,11 +14,16 @@ public class Proceso {
     private int numPaginas;
     private int tamano;
     private Pagina[] arrPaginas;
-    double tiempoLlegada;
+    private double tiempoLlegada;
+    private double turnaround;
     
     public Proceso(int id, int tamano) {
         this.id = id;
         this.tamano = tamano;
+    }
+
+    public double getTurnaround() {
+        return turnaround;
     }
 
     public int getId() {
@@ -60,6 +65,9 @@ public class Proceso {
     public void setTiempoLlegada(double tiempoLlegada) {
         this.tiempoLlegada = tiempoLlegada;
     }
-    
+
+    public void setTurnaround(double turnaround) {
+        this.turnaround = turnaround;
+    }
     
 }

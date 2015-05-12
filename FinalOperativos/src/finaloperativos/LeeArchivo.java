@@ -26,6 +26,7 @@ public class LeeArchivo {
     String[] word;
     int direccion;
     boolean bitMod;
+    Conjunto con;
     
     public LeeArchivo (String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
@@ -37,6 +38,7 @@ public class LeeArchivo {
         pId = -1;
         pTam = -1;
         p = new Procedimiento();
+        con = new Conjunto();
     }
     
     void leer() throws FileNotFoundException, IOException{
@@ -63,10 +65,14 @@ public class LeeArchivo {
                         break;
                     case "L":
                         //L id
+                        if (checaL()) {
+                        p.liberar(pId, con, lklProcesos);
+                        }
                         break;
                     case "F":
                         //reporte
                         //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
+                        con = new Conjunto();
                         break;
                     case "E":
                         break;
@@ -90,6 +96,23 @@ public class LeeArchivo {
             System.out.println("No existe el archivo de nombre " + nombreArchivo);
             return false;
         }
+    }
+    
+    boolean checaL() {
+        String temp = line;
+        if (temp.trim().split("\\s+").length != 2) {
+            return false;
+        }
+        try {
+            pId = Integer.parseInt(word[1]);
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (direccion)");
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (direccion)");
+            return false;
+        }
+        return true;
     }
     
     boolean checaA() {

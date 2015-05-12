@@ -7,6 +7,7 @@
 package finaloperativos;
 
 
+import finaloperativos.Proceso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;
@@ -32,7 +33,7 @@ public class Procedimiento extends FinalOperativos{
     }
     
 
-    public void liberar(int id){
+    public void liberar(int id, Conjunto con, LinkedList <Proceso> lklProcesos){
         
         // para el reloj
         Calendar actual = Calendar.getInstance();

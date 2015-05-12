@@ -16,6 +16,9 @@ import java.util.Calendar;
  * @author Equipo 6
  */
 public class FinalOperativos {
+    
+    static Calendar cal;
+    
     public static void proceso(String line) {
         
     }
@@ -39,18 +42,9 @@ public class FinalOperativos {
     public static void main(String[] args) throws IOException {
 // TODO code application logic here
         
-        
-        
-        
         new LeeArchivo("Pruebas.txt");
         
-        /*
-            de aqui tnemeo s
-        
-        
-        */
-        
-        Calendar cal = Calendar.getInstance();
+        cal = Calendar.getInstance()
         cal.getTime();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         System.out.println( sdf.format(cal.getTime()) );

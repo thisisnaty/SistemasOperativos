@@ -12,12 +12,13 @@ import java.lang.reflect.Array;
  *
  * @author Enrique
  */
-public class Procedimiento {
+public class Procedimiento extends FinalOperativos{
      
     int[] memPrincipal = new int[2048];
     int[] memSecundaria = new int[4096];
     
     public void procP(Proceso p){
+        p.setTiempoLlegada(cal.getTime());
         
     }
     

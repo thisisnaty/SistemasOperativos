@@ -5,6 +5,11 @@
  */
 package finaloperativos;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+
+
 /**
  *
  * @author Equipo 6
@@ -16,6 +21,11 @@ public class FinalOperativos {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Calendar cal = Calendar.getInstance();
+    	cal.getTime();
+    	SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    	System.out.println( sdf.format(cal.getTime()) );
     }
     
 }

@@ -14,4 +14,5 @@ public class Proceso {
     private int numPaginas;
     private int tamaño;
     private Pagina[] arrPaginas;
+    //tiempo de llegada
 }

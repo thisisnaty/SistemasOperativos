@@ -20,4 +20,38 @@ public class Pagina {
         bitMod = false;
         bitResidencia = false;
     }
+
+    public void setBitRef(boolean bitRef) {
+        this.bitRef = bitRef;
+    }
+
+    public void setBitMod(boolean bitMod) {
+        this.bitMod = bitMod;
+    }
+
+    public void setBitResidencia(boolean bitResidencia) {
+        this.bitResidencia = bitResidencia;
+    }
+
+    public void setMarco(int marco) {
+        this.marco = marco;
+    }
+
+    public boolean getBitRef() {
+        return bitRef;
+    }
+
+    public boolean getBitMod() {
+        return bitMod;
+    }
+
+    public boolean getBitResidencia() {
+        return bitResidencia;
+    }
+
+    public int getMarco() {
+        return marco;
+    }
+    
+    
 }

@@ -17,6 +17,16 @@ public class Conjunto {
     int cantSwapsOut;
     long turnAroundAcum;
     long turnAroundPromedio;
+    
+    public Conjunto()
+    {
+        this.cantProcesos = 0;
+        this.cantPageFaults = 0;
+        this.cantSwapsIn = 0;
+        this.cantSwapsOut = 0;
+        this.turnAroundAcum = 0;
+        this.turnAroundPromedio = 0;
+    }
 
     public int getCantProcesos() {
         return cantProcesos;
@@ -64,9 +74,5 @@ public class Conjunto {
 
     public void setTurnAroundPromedio(long turnAroundPromedio) {
         this.turnAroundPromedio = turnAroundPromedio;
-    }
-    
-    
-    
-    
+    }  
 }

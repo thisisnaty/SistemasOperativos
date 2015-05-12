@@ -7,6 +7,7 @@
 package finaloperativos;
 
 
+import finaloperativos.Proceso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;
@@ -65,13 +66,25 @@ public class Procedimiento extends FinalOperativos{
 
     }
     
-
-    public void liberar(int id){
+    public void liberar(int id, Conjunto con, LinkedList <Proceso> lklProcesos){
         
-        // para el reloj
+        // Variable que guarda el tiempo de llegada del proceso
+        Calendar llegada = null;
+        
+        // Variable que guarda el tiempo actual
         Calendar actual = Calendar.getInstance();
         actual.getTime();
-        long turnarround = (future.getTimeInMillis() - actual.getTimeInMillis());
+        
+        // Obtiene el tiempo de llegada del proceso
+        for(Object objProceso: lklProcesos) {
+            Proceso p = (Proceso) objProceso;
+            if (p.getId() == id) {
+                llegada = p.getTiempoLlegada();
+            }
+        }
+        
+        // Calcula el turnarround
+        long turnarround = (llegada.getTimeInMillis() - actual.getTimeInMillis());
         
         // Checa las primeras 2048 localidades de memoria
         // Principal y secundaria y borra el ID si es del
@@ -95,7 +108,7 @@ public class Procedimiento extends FinalOperativos{
         }  
     }
     
-    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
+    public void accesar(int direccion, int id, boolean mod, LinkedList<Proceso> listaProcesos){
         int numeroPagina;
         
         numeroPagina=(direccion/8);

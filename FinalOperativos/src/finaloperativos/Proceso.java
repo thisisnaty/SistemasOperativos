@@ -5,6 +5,8 @@
  */
 package finaloperativos;
 
+import java.util.Calendar;
+
 /**
  *
  * @author nataliagarcia
@@ -14,11 +16,16 @@ public class Proceso {
     private int numPaginas;
     private int tamano;
     private Pagina[] arrPaginas;
-    double tiempoLlegada;
+    private Calendar tiempoLlegada;
+    private double turnaround;
     
     public Proceso(int id, int tamano) {
         this.id = id;
         this.tamano = tamano;
+    }
+
+    public double getTurnaround() {
+        return turnaround;
     }
 
     public int getId() {
@@ -37,7 +44,7 @@ public class Proceso {
         return arrPaginas;
     }
 
-    public double getTiempoLlegada() {
+    public Calendar getTiempoLlegada() {
         return tiempoLlegada;
     }
 
@@ -57,9 +64,12 @@ public class Proceso {
         this.arrPaginas = arrPaginas;
     }
 
-    public void setTiempoLlegada(double tiempoLlegada) {
+    public void setTiempoLlegada(Calendar tiempoLlegada) {
         this.tiempoLlegada = tiempoLlegada;
     }
-    
+
+    public void setTurnaround(double turnaround) {
+        this.turnaround = turnaround;
+    }
     
 }

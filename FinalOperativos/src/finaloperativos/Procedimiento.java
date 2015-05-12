@@ -33,7 +33,7 @@ public class Procedimiento extends FinalOperativos{
     }
     
 
-    public void liberar(int id){
+    public void liberar(int id, Conjunto con){
         
         // para el reloj
         Calendar actual = Calendar.getInstance();

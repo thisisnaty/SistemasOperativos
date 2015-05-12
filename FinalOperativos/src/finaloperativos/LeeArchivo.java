@@ -23,6 +23,7 @@ public class LeeArchivo {
     int pTam;
     String line;
     String[] word;
+    Conjunto con;
     
     public LeeArchivo (String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
@@ -34,6 +35,7 @@ public class LeeArchivo {
         pId = -1;
         pTam = -1;
         p = new Procedimiento();
+        con = new Conjunto();
     }
     
     void leer() throws FileNotFoundException, IOException{
@@ -60,10 +62,12 @@ public class LeeArchivo {
                         break;
                     case "L":
                         //L id
+                        p.liberar(pId, con, );
                         break;
                     case "F":
                         //reporte
                         //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
+                        con = new Conjunto();
                         break;
                     case "E":
                         break;

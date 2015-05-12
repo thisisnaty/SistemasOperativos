@@ -8,13 +8,27 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
 int main() {
-        int vecM = 2048, vecS = 4096;
-        vector<int> M, S;
-        
+	ifstream archEntrada ("Pruebas.txt");
+    int vecM = 2048, vecS = 4096;
+    string line;
+    vector<int> M, S;
+
+	if (archEntrada.is_open())
+	{
+	    while ( getline (archEntrada,line) )
+	    {
+	      cout << line << '\n';
+	    }
+	    archEntrada.close();
+	 }
+	 else cout << "Unable to open file"; 		
+
         
     return 0;
 }

@@ -10,7 +10,9 @@ package finaloperativos;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 
 /**
@@ -27,8 +29,32 @@ public class Procedimiento extends FinalOperativos{
     }
     
     public void procP(Proceso p){
-        p.setTiempoLlegada(cal.getTime());
+        //p.setTiempoLlegada(cal.getTime());
+        boolean cabeEnMemoria = false;
+        List<Integer> marcosLibres = new ArrayList<Integer>();
         
+        if(p.getTamano()%8!=0){
+            p.setNumPaginas((p.getTamano()/8)+1 );
+        }
+        else{
+            p.setNumPaginas((p.getTamano()/8));
+        }
+        
+        int contMarcos = 0;
+        boolean cabeEnMarco = false;
+        for(int i = 0; i < 2048; i+=8){
+            if(memPrincipal[i]==-1){
+                cabeEnMarco = true;
+                contMarcos++;
+                marcosLibres.add(i);
+            }
+        }
+        
+        cabeEnMemoria = (contMarcos>=p.getNumPaginas()) ? true : false;
+        
+        
+        
+
     }
     
 

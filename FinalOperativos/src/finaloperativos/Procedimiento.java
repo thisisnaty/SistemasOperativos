@@ -30,7 +30,7 @@ public class Procedimiento extends FinalOperativos{
     
     public void procP(Proceso p){
         //p.setTiempoLlegada(cal.getTime());
-        boolean cabeEnMemoria = false;
+        boolean cabeEnMemPrinc = false;
         List<Integer> marcosLibres = new ArrayList<Integer>();
         
         if(p.getTamano()%8!=0){
@@ -41,18 +41,26 @@ public class Procedimiento extends FinalOperativos{
         }
         
         int contMarcos = 0;
-        boolean cabeEnMarco = false;
         for(int i = 0; i < 2048; i+=8){
             if(memPrincipal[i]==-1){
-                cabeEnMarco = true;
                 contMarcos++;
                 marcosLibres.add(i);
             }
         }
         
-        cabeEnMemoria = (contMarcos>=p.getNumPaginas()) ? true : false;
+        cabeEnMemPrinc = (contMarcos>=p.getNumPaginas()) ? true : false;
         
-        
+        if(cabeEnMemPrinc){
+            int cont = 0; 
+            while(cont<p.getNumPaginas()){
+                for(int i = marcosLibres.get(cont); i < 8; i++){
+                    memPrincipal[i] = p.getId();
+                }
+                cont++;
+            }
+        }else{
+            
+        }
         
 
     }

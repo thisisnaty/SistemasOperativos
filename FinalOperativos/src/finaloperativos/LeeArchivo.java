@@ -1,6 +1,7 @@
 /*
-    Aqui se lee el archivo, se valida la instruccion y se llama 
-    al metodo necesario dentro de la clase procedimiento.
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
 */
 package finaloperativos;
 
@@ -23,6 +24,8 @@ public class LeeArchivo {
     int pTam;
     String line;
     String[] word;
+    int direccion;
+    boolean bitMod;
     
     public LeeArchivo (String nombreArchivo) {
         this.nombreArchivo = nombreArchivo;
@@ -40,7 +43,7 @@ public class LeeArchivo {
         
         if (checaArchivo()) {
             //line es para leer cada linea del archivo de texto
-           line = scan.nextLine();
+            line = scan.nextLine();
             
             //se leera el archivo hasta llegar a E
             while (!line.equals("E")) {
@@ -50,13 +53,13 @@ public class LeeArchivo {
                         if (checaP()) {
                             Proceso proceso = new Proceso(pId, pTam);
                             p.procP(proceso);
-                        }
-                        else {
-                            //ALGO
+                            lklProcesos.add(proceso);
                         }
                         break;
                     case "A":
-                        //A direccion id bitMod
+                        if (checaA()) {
+                            p.accesar(direccion, pId, bitMod, lklProcesos);
+                        }
                         break;
                     case "L":
                         //L id
@@ -89,28 +92,74 @@ public class LeeArchivo {
         }
     }
     
+    boolean checaA() {
+        String temp = line;
+        if (temp.trim().split("\\s+").length != 4) {
+            return false;
+        }
+        try {
+            direccion = Integer.parseInt(word[1]);
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (direccion)");
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (direccion)");
+            return false;
+        }
+        
+        try {
+            pId = Integer.parseInt(word[2]);
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (direccion)");
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (direccion)");
+            return false;
+        }
+        
+        try {
+            if (word[2].equals("0")) {
+                bitMod = false;
+            }
+            else if (word[2].equals("1")) {
+                bitMod = true;
+            }
+            else {
+                return false;
+            }
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (direccion)");
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (direccion)");
+            return false;
+        }
+        return true;
+    }
+    
     boolean checaP() {
-        boolean tamano = false;
+        String temp = line;
+        if (temp.trim().split("\\s+").length != 3) {
+            return false;
+        }
         try {
             pTam = Integer.parseInt(word[1]);
-            tamano = true;
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (tamaño)");
-            tamano = false;
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (tamaño)");
+            return false;
         }
-        if (tamano) {
-            boolean numId = false;
-            try {
-                pId = Integer.parseInt(word[2]);
-                numId = true;
-            } catch(NumberFormatException e) {
-                System.out.println("Operacion invalida, no es un numero (id)");
-                numId = false;
-            }
-            if (numId) {
-                return true;
-            }
+        try {
+            pId = Integer.parseInt(word[2]);
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (id)");
+            return false;
+        } catch (NullPointerException e) {
+            System.out.println("Operacion invalida, falta un dato (id)");
+            return false;
         }
-        return false;
+        return true;
     }
 }

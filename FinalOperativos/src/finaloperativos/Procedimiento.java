@@ -61,7 +61,7 @@ public class Procedimiento extends FinalOperativos{
         }  
     }
     
-    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
+    public void accesar(int direccion, int id, boolean mod, LinkedList<Proceso> listaProcesos){
         int numeroPagina;
         
         numeroPagina=(direccion/8);

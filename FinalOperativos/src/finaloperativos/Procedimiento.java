@@ -7,6 +7,7 @@
 package finaloperativos;
 
 import java.lang.reflect.Array;
+import java.util.LinkedList;
 
 /**
  *
@@ -19,6 +20,12 @@ public class Procedimiento {
     
     public void procP(Proceso p){
         
+    }
+    
+    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
+        int numeroPagina;
+        
+        numeroPagina=(direccion/8);
     }
     
     public static void liberar(int id){

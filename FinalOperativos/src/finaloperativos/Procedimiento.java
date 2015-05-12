@@ -7,7 +7,7 @@
 package finaloperativos;
 
 
-import finaloperativos.proceso;
+import finaloperativos.Proceso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;
@@ -32,8 +32,7 @@ public class Procedimiento extends FinalOperativos{
         
     }
     
-
-    public void liberar(int id, Conjunto con, LinkedList<proceso> listaProcesos){
+    public void liberar(int id, Conjunto con, LinkedList <Proceso> lklProcesos){
         
         // Variable que guarda el tiempo de llegada del proceso
         Calendar llegada = null;
@@ -43,7 +42,7 @@ public class Procedimiento extends FinalOperativos{
         actual.getTime();
         
         // Obtiene el tiempo de llegada del proceso
-        for(Object objProceso: listaProcesos) {
+        for(Object objProceso: lklProcesos) {
             Proceso p = (Proceso) objProceso;
             if (p.getId() == id) {
                 llegada = p.getTiempoLlegada();
@@ -75,7 +74,7 @@ public class Procedimiento extends FinalOperativos{
         }  
     }
     
-    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
+    public void accesar(int direccion, int id, boolean mod, LinkedList<Proceso> listaProcesos){
         int numeroPagina;
         
         numeroPagina=(direccion/8);

@@ -41,7 +41,6 @@ public class FinalOperativos {
         BufferedReader fileIn;
         try {
             fileIn = new BufferedReader(new FileReader("Pruebas.txt"));
-            
         } catch (FileNotFoundException e){
             File prueba = new File("Pruebas.txt");
             try (PrintWriter fileOut = new PrintWriter(prueba)) {
@@ -54,6 +53,7 @@ public class FinalOperativos {
         //dato will be used to read each line of the file
         String line = fileIn.readLine();
         while (line != null) {
+            
             if (line.charAt(0)== 'P') {
                 proceso(line);
             }
@@ -70,11 +70,13 @@ public class FinalOperativos {
                 fin();
             }
             
-            else if (line.charAt(0) == 'E')
+            else if (line.charAt(0) == 'E') {
                 break;
+            }
             
-            else
+            else {
                 System.out.println("Error en la instruccion");
+            }
             
             line = fileIn.readLine();
         }

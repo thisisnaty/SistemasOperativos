@@ -17,7 +17,7 @@ import java.util.LinkedList;
  *
  * @author Enrique
  */
-public class Procedimiento {
+public class Procedimiento extends FinalOperativos{
      
     int[] memPrincipal = new int[2048];
     int[] memSecundaria = new int[4096];
@@ -27,6 +27,7 @@ public class Procedimiento {
     }
     
     public void procP(Proceso p){
+        p.setTiempoLlegada(cal.getTime());
         
     }
     

@@ -7,8 +7,13 @@
 //
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 int main() {
+        int vecM = 2048, vecS = 4096;
+        vector<int> M, S;
         
         
     return 0;

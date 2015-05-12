@@ -37,7 +37,16 @@ public class FinalOperativos {
     public static void main(String[] args) throws IOException {
 // TODO code application logic here
         
+        
+        
+        
         new LeeArchivo("Pruebas.txt");
+        
+        /*
+            de aqui tnemeo s
+        
+        
+        */
         
         Calendar cal = Calendar.getInstance();
         cal.getTime();

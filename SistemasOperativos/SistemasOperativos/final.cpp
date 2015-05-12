@@ -21,10 +21,35 @@ int main() {
 
 	if (archEntrada.is_open())
 	{
-	    while ( getline (archEntrada,line) )
+	    while ( getline (archEntrada,line))
 	    {
-	      cout << line << '\n';
-	    }
+	      if (line[0] == 'P')
+	      {
+
+	      }	
+
+	      else if (line[0] == 'A')
+	      {
+
+	      }
+
+	      else if (line[0] == 'L')
+	      {
+
+	      }
+
+	      else if (line[0] == 'F')
+	      {
+
+	      }
+
+	      else if (line[0] == 'E')
+	      {
+
+	      }
+
+	      else cout << "Error en la instruccion" << endl;
+	  	}
 	    archEntrada.close();
 	 }
 	 else cout << "Unable to open file"; 		

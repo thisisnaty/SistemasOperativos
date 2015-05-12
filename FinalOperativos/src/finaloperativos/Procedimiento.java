@@ -12,4 +12,13 @@ package finaloperativos;
  */
 public class Procedimiento {
     
+    public static void liberar(int id){
+        for(int i = 0; i < 2048;i += 8 ){
+            if (id == memprincipal() ){
+                
+            }
+                
+        }
+    }
+    
 }

@@ -18,6 +18,10 @@ public class Procedimiento {
     int[] memPrincipal = new int[2048];
     int[] memSecundaria = new int[4096];
     
+    public Procedimiento() {
+        
+    }
+    
     public void procP(Proceso p){
         
     }

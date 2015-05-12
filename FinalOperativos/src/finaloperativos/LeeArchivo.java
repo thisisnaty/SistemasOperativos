@@ -9,62 +9,114 @@ import static finaloperativos.FinalOperativos.acceso;
 import static finaloperativos.FinalOperativos.fin;
 import static finaloperativos.FinalOperativos.liberar;
 import static finaloperativos.FinalOperativos.proceso;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
-
+import java.util.Scanner;
 /**
  *
  * @author nataliagarcia
  */
 public class LeeArchivo {
-    public LeeArchivo (String nombeArchivo) throws FileNotFoundException, IOException {
-        BufferedReader fileIn = null;
+    String nombreArchivo;
+    Scanner scan;
+    Scanner scan2;
+    LinkedList<Proceso> lklProcesos;
+    int pId;
+    int pTam;
+    
+    
+    public LeeArchivo (String nombreArchivo) {
+        this.nombreArchivo = nombreArchivo;
+        scan = null;
+        scan2 = null;
+        lklProcesos = new LinkedList();
+        pId = -1;
+        pTam = -1;
+    }
+    
+    void leer() throws FileNotFoundException, IOException{
+        
         boolean leido = false;
         try {
-            fileIn = new BufferedReader(new FileReader(nombeArchivo));
+            scan = new Scanner(new File(nombreArchivo));
+            scan2 = new Scanner(new File(nombreArchivo));
             leido = true;
         } catch (FileNotFoundException e){
-            System.out.println("No existe el archivo de nombre " + nombeArchivo);
+            System.out.println("No existe el archivo de nombre " + nombreArchivo);
             leido = false;
         }
         if (leido) {
             //dato will be used to read each line of the file
-            String line = fileIn.readLine();
-            while (line != null) {
+            String line = scan.nextLine();
+            String word;
+            
+            while (!line.equals("E")) {
                 
-                if (line.charAt(0)== 'P') {
-                    proceso(line);
+                word = scan2.next();
+                
+                if (word.equals("P")) {
+                    if (checaP(word, line)) {
+                        Proceso p = new Proceso(pId, pTam);
+                    }
                 }
                 
+                
                 else if (line.charAt(0)== 'A') {
+                    //A direccion id bitMod
                     acceso(line);
                 }
                 
                 else if (line.charAt(0) == 'L') {
+                    //L id
                     liberar(line);
                 }
                 
                 else if (line.charAt(0) == 'F') {
+                    //reporte
+                    //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
                     fin();
                 }
                 
-                else if (line.charAt(0) == 'E') {
-                    break;
-                }
-                
-                else {
+                else if (line.charAt(0) != 'E') {
                     System.out.println("Error en la instruccion");
                 }
                 
-                line = fileIn.readLine();
+                line = scan.nextLine();
             }
             
-            fileIn.close();
+            scan.close();
         }
+    }
+    boolean checaP(String word, String line) {
+        word = scan2.next();
+        boolean tamano = false;
+        try {
+            pTam = Integer.parseInt(word);
+            tamano = true;
+        } catch(NumberFormatException e) {
+            System.out.println("Operacion invalida, no es un numero (tamaño)");
+            tamano = false;
+            word = scan.nextLine();
+            line = scan.nextLine();
+        }
+        if (tamano) {
+            word = scan2.next();
+            boolean numId = false;
+            try {
+                pId = Integer.parseInt(word);
+                numId = true;
+            } catch(NumberFormatException e) {
+                System.out.println("Operacion invalida, no es un numero (id)");
+                numId = false;
+                word = scan.nextLine();
+                line = scan.nextLine();
+            }
+            if (numId) {
+                return true;
+            }
+        }
+        return false;
     }
 }

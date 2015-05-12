@@ -6,13 +6,12 @@
 
 package finaloperativos;
 
-<<<<<<< HEAD
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-=======
 import java.lang.reflect.Array;
 import java.util.LinkedList;
->>>>>>> b0c3a08214ba5a3f7e81612d5c546266d0fa8b3d
+
 
 /**
  *
@@ -31,7 +30,7 @@ public class Procedimiento {
         
     }
     
-<<<<<<< HEAD
+
     public void liberar(int id){
         
         // para el reloj
@@ -49,18 +48,6 @@ public class Procedimiento {
             
             if (memSecundaria[i] == id){
                 memSecundaria[i] = -1;
-=======
-    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
-        int numeroPagina;
-        
-        numeroPagina=(direccion/8);
-    }
-    
-    public static void liberar(int id){
-        for(int i = 0; i < 2048;i += 8 ){
-            if (id == memprincipal() ){
-                
->>>>>>> b0c3a08214ba5a3f7e81612d5c546266d0fa8b3d
             }
         }
         
@@ -71,6 +58,12 @@ public class Procedimiento {
                 memSecundaria[i] = -1;
             }    
         }  
+    }
+    
+    public void accesar(int direccion, int id, boolean mod, LinkedList<proceso> listaProcesos){
+        int numeroPagina;
+        
+        numeroPagina=(direccion/8);
     }
     
 }

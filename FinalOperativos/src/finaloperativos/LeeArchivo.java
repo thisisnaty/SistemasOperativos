@@ -1,14 +1,9 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
+    Aqui se lee el archivo, se valida la instruccion y se llama 
+    al metodo necesario dentro de la clase procedimiento.
 */
 package finaloperativos;
 
-import static finaloperativos.FinalOperativos.acceso;
-import static finaloperativos.FinalOperativos.fin;
-import static finaloperativos.FinalOperativos.liberar;
-import static finaloperativos.FinalOperativos.proceso;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;

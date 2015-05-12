@@ -6,7 +6,8 @@
 
 package finaloperativos;
 
-import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 /**
  *
@@ -21,13 +22,33 @@ public class Procedimiento {
         
     }
     
-    public static void liberar(int id){
-        for(int i = 0; i < 2048;i += 8 ){
-            if (id == memprincipal() ){
-                
+    public void liberar(int id){
+        
+        // para el reloj
+        Calendar actual = Calendar.getInstance();
+        actual.getTime();
+        long turnarround = (future.getTimeInMillis() - actual.getTimeInMillis());
+        
+        // Checa las primeras 2048 localidades de memoria
+        // Principal y secundaria y borra el ID si es del
+        // Proceso
+        for (int i = 0; i < 2048; i += 8){
+            if (memPrincipal[i] == id){
+                memPrincipal[i] = -1;
             }
-                
+            
+            if (memSecundaria[i] == id){
+                memSecundaria[i] = -1;
+            }
         }
+        
+        // Checa las 2048 localidades faltantes de memoria
+        // Secundaria
+        for (int i = 2048; i < 4096; i += 8){
+            if (memSecundaria[i] == id){
+                memSecundaria[i] = -1;
+            }    
+        }  
     }
     
 }

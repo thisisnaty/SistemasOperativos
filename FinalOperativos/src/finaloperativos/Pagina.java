@@ -13,6 +13,7 @@ public class Pagina {
     private boolean bitRef;
     private boolean bitMod;
     private boolean bitResidencia;
+    private int marco;
     
     public Pagina() {
         bitRef = false;

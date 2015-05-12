@@ -9,38 +9,13 @@
 package finaloperativos;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
 
 public class FinalOperativos {
-    static Calendar cal;
-    
-    public static void proceso(String line) {
-        
-    }
-    
-    public static void acceso(String line) {
-        
-    }
-    
-    public static void liberar(String line) {
-        
-    }
-    
-    public static  void fin() {
-        
-    }
     
     // Metodo principal del programa, aqui comienza la ejecucion
     public static void main(String[] args) throws IOException {
         
         // Crea un objeto encargado de leer el archivo de texto
         new LeeArchivo("Pruebas.txt");
-        
-        cal = Calendar.getInstance();
-        cal.getTime();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        System.out.println( sdf.format(cal.getTime()) );
     }
 }

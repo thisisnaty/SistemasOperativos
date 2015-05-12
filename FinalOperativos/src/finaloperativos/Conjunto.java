@@ -64,9 +64,5 @@ public class Conjunto {
 
     public void setTurnAroundPromedio(long turnAroundPromedio) {
         this.turnAroundPromedio = turnAroundPromedio;
-    }
-    
-    
-    
-    
+    }  
 }

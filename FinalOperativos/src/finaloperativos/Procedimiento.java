@@ -7,6 +7,7 @@
 package finaloperativos;
 
 
+import finaloperativos.proceso;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;

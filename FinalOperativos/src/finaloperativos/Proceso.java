@@ -12,7 +12,7 @@ package finaloperativos;
 public class Proceso {
     private int id;
     private int numPaginas;
-    private int tamaño;
+    private int tamano;
     private Pagina[] arrPaginas;
-    //tiempo de llegada
+    double tiempoLlegada;
 }

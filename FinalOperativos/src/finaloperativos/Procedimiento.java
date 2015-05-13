@@ -66,6 +66,7 @@ public class Procedimiento extends FinalOperativos{
                 pCont++;
             }
         }else{
+            //SWAPS
             //liberar espacios de memoria en mem principal hasta que haya
             //espacio suficiente
             
@@ -75,7 +76,6 @@ public class Procedimiento extends FinalOperativos{
             
             //sacar procesos mientras totalLibres sea menor a num de pag del proc
             for(int i = 0; (i<256) &&(totalLibres<p.getNumPaginas()); i++){
-                
                 //opcion1, dos bits de ref y mod son 0
                 if(prioridad1 && !memPrincipal[i].getRef() && !memPrincipal[i].getMod()){
                     int j = 0;
@@ -157,7 +157,6 @@ public class Procedimiento extends FinalOperativos{
                 }
             }
              while(marcosLibres.iterator().hasNext()){
-                 
                 int cont; 
                 int pCont = 0;
                 cont = marcosLibres.iterator().next();

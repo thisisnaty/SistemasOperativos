@@ -74,7 +74,7 @@ public class Procedimiento extends FinalOperativos{
         // Variable que guarda el tiempo actual
         Calendar actual = Calendar.getInstance();
         actual.getTime();
-        
+        int contador = 0;
         // Obtiene el tiempo de llegada del proceso
         for(Object objProceso: lklProcesos) {
             Proceso p = (Proceso) objProceso;

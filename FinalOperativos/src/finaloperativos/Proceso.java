@@ -17,15 +17,20 @@ public class Proceso {
     private int tamano;
     private Pagina[] arrPaginas;
     private Calendar tiempoLlegada;
-    private double turnaround;
+    private Calendar terminacion;
+    private long turnaround; 
     
     public Proceso(int id, int tamano) {
         this.id = id;
         this.tamano = tamano;
     }
 
-    public double getTurnaround() {
+    public long getTurnaround() {
         return turnaround;
+    }
+
+    public Calendar getTerminacion() {
+        return terminacion;
     }
 
     public int getId() {
@@ -68,8 +73,13 @@ public class Proceso {
         this.tiempoLlegada = tiempoLlegada;
     }
 
-    public void setTurnaround(double turnaround) {
+    public void setTerminacion(Calendar terminacion) {
+        this.terminacion = terminacion;
+    }
+
+    public void setTurnaround(long turnaround) {
         this.turnaround = turnaround;
     }
+    
     
 }

@@ -7,15 +7,10 @@
 package finaloperativos;
 
 
-import finaloperativos.Proceso;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-
 
 /**
  *
@@ -213,9 +208,9 @@ public class Procedimiento extends FinalOperativos{
             Calendar actual = Calendar.getInstance();
             actual.getTime();
         
-            // Calcula el turnarround
+            // Calcula el turnarround y guarda el tiempo de terminacion
+            lklProcesos.get(index).setTerminacion(actual);
             long turnarround = (llegada.getTimeInMillis() - actual.getTimeInMillis());
-            lklProcesos.get(index).setTurnaround(turnarround);
             con.ActualCantProcesosTerminados();
             con.setTurnAroundAcum(turnarround);
         

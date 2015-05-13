@@ -310,8 +310,33 @@ public class Procedimiento extends FinalOperativos{
         }
     }
     
+    // Muestra los datos de termino de un conjunto de instrucciones
+    // Recibe la lista de procesos del conjunto y el conjunto que guarda la
+    // informacion
     public void fin(LinkedList <Proceso> lklProcesos, Conjunto con){
         
+        // Recorre la lista para obtener procesos sin terminar
+        for(Object objProceso: lklProcesos) {
+            Proceso p = (Proceso) objProceso;
+            if (p.getTerminacion() == null) {
+                System.out.println("ERROR - Se quedo cargando el proceso " + p.getId());
+            }
+        }
+        
+        // Muestra los datos del conjunto de instrucciones
+        System.out.println("Fin. REPORTE DE SALIDA");
+        for(Object objProceso: lklProcesos) {
+            Proceso p = (Proceso) objProceso;
+            if (p.getTerminacion() != null) {
+                System.out.println("Turnarround del proceso " + p.getId() + 
+                                   " = " + p.getTurnaround() + "ms");
+            }
+        }
+        System.out.println("Procesos terminados: " + con.getCantProcesosTerminados());
+        System.out.println("Page faults: " + con.getCantPageFaults());
+        System.out.println("Swap ins: " + con.getCantSwapsIn());
+        System.out.println("Swap out: " + con.getCantSwapsOut());
+        System.out.println("Turnarround promedio: " + con.getTurnAroundPromedio());
     }
     
     public void accesar(int direccion, int id, boolean mod, LinkedList<Proceso> listaProcesos){

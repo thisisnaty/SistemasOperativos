@@ -8,18 +8,22 @@
 package finaloperativos;
 
 /**
- *
+ *Conjunto
+ * La clase <code>Conjunto</code> almacena los datos que se imprimen en el reporte
+ * cuando se hace la instruccion F 
  * @author Enrique
  */
 public class Conjunto {
-    int cantProcesosTerminados;
-    int cantPageFaults;
-    int cantSwapsIn;
-    int cantSwapsOut;
-    long turnAroundAcum;
-    long turnAroundPromedio;
+    int cantProcesosTerminados;     //cuantos procesos fueron terminados en este conjunto de instrucciones
+    int cantPageFaults;     //cuandos fallos de página hubieron en este conjunto de instrucciones
+    int cantSwapsIn;        //cuantos swaps in hubieron en este conjunto de instrucciones  
+    int cantSwapsOut;       //cuantos swaps out hubieron en este conjunto de instrucciones
+    long turnAroundAcum;    //cual fue el turnaround de cada proceso en este conjunto de instrucciones
+    long turnAroundPromedio;    //cual fue el turnaround promedio en este conjunto de instrucciones
     
     public Conjunto(){
+        //se inicializan todas las variables en 0 para que se vayan incrementando conforme se hacen
+        //las instrucciones del conjunto
         this.cantProcesosTerminados = 0;
         this.cantPageFaults = 0;
         this.cantSwapsIn = 0;

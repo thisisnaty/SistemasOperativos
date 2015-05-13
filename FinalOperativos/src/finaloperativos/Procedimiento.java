@@ -37,7 +37,7 @@ public class Procedimiento extends FinalOperativos{
         if(p.getTamano()%8!=0){
             p.setNumPaginas((p.getTamano()/8)+1 );
         }
-        else{
+        else{ 
             p.setNumPaginas((p.getTamano()/8));
         }
         

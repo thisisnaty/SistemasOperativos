@@ -1,7 +1,6 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
+    Lee el archivo y va llamando al metodo que se necesita,
+    checa las instrucciones para ver que sean correctas.
 */
 package finaloperativos;
 
@@ -15,17 +14,22 @@ import java.util.Scanner;
  * @author nataliagarcia
  */
 public class LeeArchivo {
+    // Variable que tiene la memoria y los metodos proceso, acceso, liberar
     Procedimiento p;
+    // Variables para la lectura del archivo
     String nombreArchivo;
     Scanner scan;
     Scanner scan2;
-    LinkedList<Proceso> lklProcesos;
     int pId;
     int pTam;
     String line;
     String[] word;
     int direccion;
     boolean bitMod;
+    // Lista encadenada que va a tener todos los procesos
+    LinkedList<Proceso> lklProcesos;
+    // Guarda la informacion del conjunto de instrucciones
+    // Turnarround, num de swaps in y out, page faults
     Conjunto con;
     
     public LeeArchivo (String nombreArchivo) {
@@ -53,6 +57,7 @@ public class LeeArchivo {
                 switch (word[0]) {
                     case "P":
                         if (checaP()) {
+                            System.out.println(line);
                             Proceso proceso = new Proceso(pId, pTam);
                             p.procP(proceso);
                             lklProcesos.add(proceso);
@@ -60,17 +65,18 @@ public class LeeArchivo {
                         break;
                     case "A":
                         if (checaA()) {
+                            System.out.println(line);
                             p.accesar(direccion, pId, bitMod, lklProcesos);
                         }
                         break;
                     case "L":
                         if (checaL()) {
+                            System.out.println(line);
                             p.liberar(pId, con, lklProcesos);
                         }
                         break;
                     case "F":
                         //reporte
-                        //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
                         if (line.equals("F")) {
                             con = new Conjunto();
                             //Reporte r = new Reporte();
@@ -137,14 +143,15 @@ public class LeeArchivo {
         }
         
         try {
-            if (word[2].equals("0")) {
-                bitMod = false;
-            }
-            else if (word[2].equals("1")) {
-                bitMod = true;
-            }
-            else {
-                return false;
+            switch (word[2]) {
+                case "0":
+                    bitMod = false;
+                    break;
+                case "1":
+                    bitMod = true;
+                    break;
+                default:
+                    return false;
             }
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");

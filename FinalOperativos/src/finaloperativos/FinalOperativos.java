@@ -5,6 +5,10 @@
     La memoria principal es de 2048 bytes con tamano de pagina 8 (256 paginas)
     La memoria secundaria es de 4096 bytes.
     Al solicitar cargar un proceso, se tiene que cargar completo a memoria.
+    Natalia Garcia A0
+    Enrique Marroquin A0
+    Edgar Manuel Rodriguez A0
+    Alejandro de la Rosa Cortes A01381412
 */
 package finaloperativos;
 
@@ -16,6 +20,7 @@ public class FinalOperativos {
     public static void main(String[] args) throws IOException {
         
         // Crea un objeto encargado de leer el archivo de texto
-        new LeeArchivo("Pruebas.txt");
+        LeeArchivo x = new LeeArchivo("Pruebas.txt");
+        x.leer();
     }
 }

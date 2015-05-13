@@ -16,36 +16,55 @@ public class Proceso {
     private int numPaginas;
     private int tamano;
     private Pagina[] arrPaginas;
+    private Calendar llegada;
     private Calendar tiempoLlegada;
-    private double turnaround;
+    private long turnaround;
+    private Calendar terminacion;
     
     public Proceso(int id, int tamano) {
         this.id = id;
         this.tamano = tamano;
+        if(this.tamano%8 != 0){
+            this.numPaginas = tamano/8 + 1;
+        }
+        else{
+            this.numPaginas = tamano/8;
+        }
+        this.arrPaginas = new Pagina[numPaginas];
+        this.tiempoLlegada = Calendar.getInstance();
+        this.tiempoLlegada.getTime();
+        this.turnaround = 0;
+        this.terminacion = null;
     }
-
-    public double getTurnaround() {
-        return turnaround;
+    
+    // Metodos para obtener los datos del proceso
+    public long getTurnaround() {
+        return (llegada.getTimeInMillis() - terminacion.getTimeInMillis());
+    }
+    
+    public Calendar getTerminacion() {
+        return terminacion;
     }
 
     public int getId() {
         return id;
     }
-
     public int getNumPaginas() {
         return numPaginas;
     }
-
     public int getTamano() {
         return tamano;
     }
-
     public Pagina[] getArrPaginas() {
         return arrPaginas;
     }
-
     public Calendar getTiempoLlegada() {
-        return tiempoLlegada;
+        return llegada;
+    }
+    
+    // Metodos para modificar los datos del proceso
+    public void setTurnaround(long turnaround) {
+        this.turnaround = turnaround;
     }
 
     public void setId(int id) {
@@ -65,11 +84,10 @@ public class Proceso {
     }
 
     public void setTiempoLlegada(Calendar tiempoLlegada) {
-        this.tiempoLlegada = tiempoLlegada;
+        this.llegada = tiempoLlegada;
     }
 
-    public void setTurnaround(double turnaround) {
-        this.turnaround = turnaround;
+    public void setTerminacion(Calendar terminacion) {
+        this.terminacion = terminacion;
     }
-    
 }

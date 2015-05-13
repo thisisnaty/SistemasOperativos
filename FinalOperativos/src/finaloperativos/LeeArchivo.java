@@ -1,3 +1,8 @@
+
+/*
+    Lee el archivo y va llamando al metodo que se necesita,
+    checa las instrucciones para ver que sean correctas.
+*/
 package finaloperativos;
 
 import java.io.File;
@@ -10,7 +15,7 @@ import java.util.Scanner;
  * @author nataliagarcia
  */
 public class LeeArchivo {
-    Procedimiento p;                    //procedimiento p es donde se ejecutan los procesos segun el comando
+    Procedimiento p;                    // Variable que tiene la memoria y los metodos proceso, acceso, liberar
     String nombreArchivo;           //nombre del archivo que se asigan en el main de FinalOperativos
     Scanner scan;                       //un scanner para leer cada linea del archivo
     LinkedList<Proceso> lklProcesos;            //una lista encadenada donde se guardan los procesos
@@ -21,6 +26,7 @@ public class LeeArchivo {
     int direccion;                         //la direccion se asigna con el comando A
     boolean bitMod;                    //el bit de modificacion que se asigna con el comando A
     Conjunto con;                        //donde se guardan los datos para el reporte del conjunto hasta fin
+    
     
     /**
      * LeeArchivo

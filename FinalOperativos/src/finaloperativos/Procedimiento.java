@@ -23,6 +23,10 @@ public class Procedimiento extends FinalOperativos {
     public Procedimiento() {
         memPrincipal = new Marco[256];
         memSecundaria = new Marco[512];
+        for (int i = 0; i < 256; i++) {
+            memPrincipal[i] = new Marco();
+            memSecundaria[i] = new Marco();
+        }
     }
 
     // Metodo que mete un proceso a memoria principal, entra el proceso,
@@ -30,7 +34,6 @@ public class Procedimiento extends FinalOperativos {
     // El metodo hace swap out si no hay memoria principal disponible utilizando
     // bit de referencia y bit de modificacion.
     public void procP(Proceso p, Conjunto con) {
-
         //p.setTiempoLlegada(cal.getTime());
         boolean cabeEnMemPrinc = false;
         List<Integer> marcosLibres = new ArrayList<>();
@@ -59,7 +62,6 @@ public class Procedimiento extends FinalOperativos {
             while (marcosLibres.iterator().hasNext()) {
                 //TODO
                 //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
-
                 cont = marcosLibres.iterator().next();
                 memPrincipal[cont].setID(p.getId());
                 memPrincipal[cont].setnPag(pCont);

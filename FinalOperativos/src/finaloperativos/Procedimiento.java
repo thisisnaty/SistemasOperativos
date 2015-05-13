@@ -50,142 +50,162 @@ public class Procedimiento extends FinalOperativos {
         }
 
         int cantMarcosLibres = 0;
-
-        for (int i = 0; (i < 256) && (cantMarcosLibres < p.getNumPaginas()); i++) {
-            if (memPrincipal[i].getID() == -1) {
-                cantMarcosLibres++;
-                marcosLibres.add(i);
+        
+        boolean existe = false;
+        
+        for (int i =0; i < 256; i++){
+            if(memPrincipal[i].getID()==p.getId()){
+                existe = true;
             }
         }
         
-        memPrincipal[255].getID();
-        p.getId();
-        System.out.println("Se utilizaron los siguientes marcos de pagina: ");
-        cabeEnMemPrinc = (cantMarcosLibres >= p.getNumPaginas());
-        int tm = cantMarcosLibres;
-
-        if (cabeEnMemPrinc) {
-            int cont = 0;
-            int pCont = 0;
-            
-            for(int i = 0; i < cantMarcosLibres; i++) {
-                //TODO
-                //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
-                cont = marcosLibres.get(i);
-                memPrincipal[cont].setID(p.getId());
-                memPrincipal[cont].setnPag(pCont);
-                System.out.print("" + cont + " ");
-                pCont++;
+        for (int i =0; i < 512; i++){
+            if(memSecundaria[i].getID()==p.getId()){
+                existe = true;
             }
-            marcosLibres.clear();
-            System.out.println("");
-        } else {
-            //SWAPS
-            //liberar espacios de memoria en mem principal hasta que haya
-            //espacio suficiente
+        }
+        
+        if(!existe){
 
-            boolean prioridad1 = true, prioridad2 = false, prioridad3 = false, prioridad4 = false;
-            int totalLibres = cantMarcosLibres;
-
-            //sacar procesos mientras totalLibres sea menor a num de pag del proc
-            for (int i = 0; (i < 256) && (totalLibres < p.getNumPaginas()); i++) {
-                //opcion1, dos bits de ref y mod son 0
-                if (prioridad1 && !memPrincipal[i].getRef() && !memPrincipal[i].getMod()) {
-                    int j = 0;
-                    //acomodar en el primer lugar que se encuentre en mem sec
-                    while (memSecundaria[j].getID() != -1) {
-                        j++;
-                    }
-                    memSecundaria[j].setID(memPrincipal[i].getID());
-                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+            for (int i = 0; (i < 256) && (cantMarcosLibres < p.getNumPaginas()); i++) {
+                if (memPrincipal[i].getID() == -1) {
+                    cantMarcosLibres++;
                     marcosLibres.add(i);
-                    memPrincipal[i].setID(-1);
-                    memPrincipal[i].setRef(false);
-                    memPrincipal[i].setMod(false);
-                    totalLibres++;
-                    con.setCantSwapsOut();
-                }//opcion2, bit de ref es 1 y bit de mod es 0
-                else if (prioridad2 && memPrincipal[i].getRef() && !memPrincipal[i].getMod()) {
-                    int j = 0;
-                    //acomodar en el primer lugar que se encuentre en mem sec
-                    while (memSecundaria[j].getID() != -1) {
-                        j++;
-                    }
-                    memSecundaria[j].setID(memPrincipal[i].getID());
-                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
-                    marcosLibres.add(i);
-                    memPrincipal[i].setID(-1);
-                    memPrincipal[i].setRef(false);
-                    memPrincipal[i].setMod(false);
-                    totalLibres++;
-                    con.setCantSwapsOut();
-                }//opcion3, bit de ref es 0 y bit de mod es 1
-                else if (prioridad3 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
-                    int j = 0;
-                    //acomodar en el primer lugar que se encuentre en mem sec
-                    while (memSecundaria[j].getID() != -1) {
-                        j++;
-                    }
-                    memSecundaria[j].setID(memPrincipal[i].getID());
-                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
-                    marcosLibres.add(i);
-                    memPrincipal[i].setID(-1);
-                    memPrincipal[i].setRef(false);
-                    memPrincipal[i].setMod(false);
-                    totalLibres++;
-                    con.setCantSwapsOut();
-                }//opcion4, bit de ref es 1 y bit de mod es 1
-                else if (prioridad4 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
-                    int j = 0;
-                    //acomodar en el primer lugar que se encuentre en mem sec
-                    while (memSecundaria[j].getID() != -1) {
-                        j++;
-                    }
-                    memSecundaria[j].setID(memPrincipal[i].getID());
-                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
-                    marcosLibres.add(i);
-                    memPrincipal[i].setID(-1);
-                    memPrincipal[i].setRef(false);
-                    memPrincipal[i].setMod(false);
-                    totalLibres++;
-                    con.setCantSwapsOut();
-                }
-
-                //si no encontro procesos con la mayor prioridad, ir a la sig.
-                //prioridad
-                if (i == 255 && (totalLibres < p.getNumPaginas())) {
-                    if (prioridad1) {
-                        i = 0;
-                        prioridad1 = false;
-                        prioridad2 = true;
-                    } else if (prioridad2) {
-                        i = 0;
-                        prioridad2 = false;
-                        prioridad3 = true;
-                    } else if (prioridad3) {
-                        i = 0;
-                        prioridad3 = false;
-                        prioridad4 = true;
-                    } else {
-                        System.out.println("error, no hay memoria suficiente");
-                        break;
-                    }
                 }
             }
-            // Mete las paginas a memoria
-            
-            for(int i = 0; i< marcosLibres.size(); i++){
+
+            memPrincipal[255].getID();
+            p.getId();
+            System.out.println("Se utilizaron los siguientes marcos de pagina: ");
+            cabeEnMemPrinc = (cantMarcosLibres >= p.getNumPaginas());
+            int tm = cantMarcosLibres;
+
+            if (cabeEnMemPrinc) {
                 int cont = 0;
                 int pCont = 0;
-                cont = marcosLibres.get(i);
-                memPrincipal[cont].setID(p.getId());
-                memPrincipal[cont].setID(p.getId());
-                pCont++;
-                System.out.print("" + cont + " ");
+
+                for(int i = 0; i < cantMarcosLibres; i++) {
+                    //TODO
+                    //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
+                    cont = marcosLibres.get(i);
+                    memPrincipal[cont].setID(p.getId());
+                    memPrincipal[cont].setnPag(pCont);
+                    System.out.print("" + cont + " ");
+                    pCont++;
+                }
+                marcosLibres.clear();
+                System.out.println("");
+            } else {
+                //SWAPS
+                //liberar espacios de memoria en mem principal hasta que haya
+                //espacio suficiente
+
+                boolean prioridad1 = true, prioridad2 = false, prioridad3 = false, prioridad4 = false;
+                int totalLibres = cantMarcosLibres;
+
+                //sacar procesos mientras totalLibres sea menor a num de pag del proc
+                for (int i = 0; (i < 256) && (totalLibres < p.getNumPaginas()); i++) {
+                    //opcion1, dos bits de ref y mod son 0
+                    if (prioridad1 && !memPrincipal[i].getRef() && !memPrincipal[i].getMod()) {
+                        int j = 0;
+                        //acomodar en el primer lugar que se encuentre en mem sec
+                        while (memSecundaria[j].getID() != -1) {
+                            j++;
+                        }
+                        memSecundaria[j].setID(memPrincipal[i].getID());
+                        memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                        marcosLibres.add(i);
+                        memPrincipal[i].setID(-1);
+                        memPrincipal[i].setRef(false);
+                        memPrincipal[i].setMod(false);
+                        totalLibres++;
+                        con.setCantSwapsOut();
+                    }//opcion2, bit de ref es 1 y bit de mod es 0
+                    else if (prioridad2 && memPrincipal[i].getRef() && !memPrincipal[i].getMod()) {
+                        int j = 0;
+                        //acomodar en el primer lugar que se encuentre en mem sec
+                        while (memSecundaria[j].getID() != -1) {
+                            j++;
+                        }
+                        memSecundaria[j].setID(memPrincipal[i].getID());
+                        memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                        marcosLibres.add(i);
+                        memPrincipal[i].setID(-1);
+                        memPrincipal[i].setRef(false);
+                        memPrincipal[i].setMod(false);
+                        totalLibres++;
+                        con.setCantSwapsOut();
+                    }//opcion3, bit de ref es 0 y bit de mod es 1
+                    else if (prioridad3 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
+                        int j = 0;
+                        //acomodar en el primer lugar que se encuentre en mem sec
+                        while (memSecundaria[j].getID() != -1) {
+                            j++;
+                        }
+                        memSecundaria[j].setID(memPrincipal[i].getID());
+                        memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                        marcosLibres.add(i);
+                        memPrincipal[i].setID(-1);
+                        memPrincipal[i].setRef(false);
+                        memPrincipal[i].setMod(false);
+                        totalLibres++;
+                        con.setCantSwapsOut();
+                    }//opcion4, bit de ref es 1 y bit de mod es 1
+                    else if (prioridad4 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
+                        int j = 0;
+                        //acomodar en el primer lugar que se encuentre en mem sec
+                        while (memSecundaria[j].getID() != -1) {
+                            j++;
+                        }
+                        memSecundaria[j].setID(memPrincipal[i].getID());
+                        memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                        marcosLibres.add(i);
+                        memPrincipal[i].setID(-1);
+                        memPrincipal[i].setRef(false);
+                        memPrincipal[i].setMod(false);
+                        totalLibres++;
+                        con.setCantSwapsOut();
+                    }
+
+                    //si no encontro procesos con la mayor prioridad, ir a la sig.
+                    //prioridad
+                    if (i == 255 && (totalLibres < p.getNumPaginas())) {
+                        if (prioridad1) {
+                            i = 0;
+                            prioridad1 = false;
+                            prioridad2 = true;
+                        } else if (prioridad2) {
+                            i = 0;
+                            prioridad2 = false;
+                            prioridad3 = true;
+                        } else if (prioridad3) {
+                            i = 0;
+                            prioridad3 = false;
+                            prioridad4 = true;
+                        } else {
+                            System.out.println("error, no hay memoria suficiente");
+                            break;
+                        }
+                    }
+                }
+                // Mete las paginas a memoria
+                int pCont = 0;
+                for(int i = 0; i< marcosLibres.size(); i++){
+                    int cont = 0;
+                    cont = marcosLibres.get(i);
+                    memPrincipal[cont].setID(p.getId());
+                    memPrincipal[cont].setnPag(pCont);
+                    memPrincipal[cont].setMod(false);
+                    memPrincipal[cont].setRef(false);
+                    pCont++;
+                    System.out.print("" + cont + " ");
+                }
+                System.out.print("\n");
+                memPrincipal[0].getID();
+                marcosLibres.clear();
             }
-            System.out.print("\n");
-            memPrincipal[0].getID();
-            marcosLibres.clear();
+        }else{
+            System.out.println("ya existe el proceso en memoria con esa id");
         }
     }
 
@@ -306,11 +326,14 @@ public class Procedimiento extends FinalOperativos {
         es11 = false;//incializacion
         estaPrincipal = false;//incializacion
         estaVacio = false;//incializacion
+        boolean procesoCargado = false;
         numeroPagina = (direccion / 8);//incializacion
+        
         
         for (Object objProceso : listaProcesos) {
             Proceso p = (Proceso) objProceso;
             if(p.getId() == id){
+            procesoCargado = true;
             if (direccion >= p.getTamano()) {
                 System.out.println("ERROR - Direccion invalida");
             }
@@ -321,11 +344,12 @@ public class Procedimiento extends FinalOperativos {
 
                 if (modificacion) {
                     memPrincipal[i].setMod(true);
-                } else {
+                } 
+                else {
                     memPrincipal[i].setRef(true);
+                }
                 
                 estaPrincipal = true;
-                }
                 
                 System.out.println("Direccion virtual: " + direccion);
                 int direccionReal = (direccion % 8) + (i * 8);
@@ -334,6 +358,7 @@ public class Procedimiento extends FinalOperativos {
         }
 
         if (!estaPrincipal) {//verifico que no esta en memoria principal si no en secundaria
+            System.out.println("No esta en principal");
             for (int i = 0; i < 512; i++) {
                 if (id == memSecundaria[i].getID() && memSecundaria[i].getnPag() == numeroPagina) {//checa en que lugar de memoria secundaria se encuentra
                     for (int j = 0; j < 256; j++) {//busca un lugar vacio en memoria principal
@@ -351,6 +376,7 @@ public class Procedimiento extends FinalOperativos {
                             memPrincipal[j].setnPag(memSecundaria[i].getnPag());
                             estaVacio = true;
                             con.setCantSwapsIn();
+                            con.setCantPageFaults();
                             j = 256;
                             i = 512;
                         }
@@ -381,6 +407,7 @@ public class Procedimiento extends FinalOperativos {
 
                                         con.setCantSwapsIn();
                                         con.setCantSwapsOut();
+                                        con.setCantPageFaults();
                                         k = 512;
                                     }
                                 }
@@ -419,6 +446,7 @@ public class Procedimiento extends FinalOperativos {
 
                                             con.setCantSwapsIn();
                                             con.setCantSwapsOut();
+                                            con.setCantPageFaults();
                                             k = 512;
                                         }
                                     }
@@ -456,6 +484,7 @@ public class Procedimiento extends FinalOperativos {
 
                                                 con.setCantSwapsIn();
                                                 con.setCantSwapsOut();
+                                                con.setCantPageFaults();
                                                 k = 512;
                                             }
                                         }
@@ -493,6 +522,7 @@ public class Procedimiento extends FinalOperativos {
 
                                                 con.setCantSwapsIn();
                                                 con.setCantSwapsOut();
+                                                con.setCantPageFaults();
                                                 k = 512;
                                             }
                                         }
@@ -517,5 +547,9 @@ public class Procedimiento extends FinalOperativos {
     }
     }
     }
+        if(!procesoCargado){
+            System.out.println("ERROR - El proceso no se ha creado");
+            
+        }
     }
 }

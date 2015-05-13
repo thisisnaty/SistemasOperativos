@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class Procedimiento extends FinalOperativos{
         //p.setTiempoLlegada(cal.getTime());
         boolean cabeEnMemPrinc = false;
         List<Integer> marcosLibres = new ArrayList<Integer>();
+        List<Integer> marcosLibresMemSec = new ArrayList<Integer>();
         
         if(p.getTamano()%8!=0){
             p.setNumPaginas((p.getTamano()/8)+1 );
@@ -41,25 +43,130 @@ public class Procedimiento extends FinalOperativos{
             p.setNumPaginas((p.getTamano()/8));
         }
         
-        int contMarcos = 0;
-        for(int i = 0; i < 2048; i+=8){
-            if(memPrincipal[i]==-1){
-                contMarcos++;
+        int cantMarcosLibres = 0;
+        for(int i = 0; (i < 256) && (cantMarcosLibres<p.getNumPaginas()); i++){
+            if(memPrincipal[i].getID()==-1){
+                cantMarcosLibres++;
                 marcosLibres.add(i);
             }
         }
         
-        cabeEnMemPrinc = (contMarcos>=p.getNumPaginas()) ? true : false;
+        cabeEnMemPrinc = (cantMarcosLibres>=p.getNumPaginas()) ? true : false;
         
         if(cabeEnMemPrinc){
-            int cont = 0; 
-            while(cont<p.getNumPaginas()){
-                for(int i = marcosLibres.get(cont); i < 8; i++){
-                    memPrincipal[i] = p.getId();
-                }
-                cont++;
+            int cont; 
+            int pCont = 0;
+            while(marcosLibres.iterator().hasNext()){
+                //TODO
+                //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
+                
+                cont = marcosLibres.iterator().next();
+                memPrincipal[cont].setID(p.getId());
+                memPrincipal[cont].setnPag(pCont);
+                pCont++;
             }
         }else{
+            //liberar espacios de memoria en mem principal hasta que haya
+            //espacio suficiente
+            
+            boolean prioridad1= true, prioridad2=false, prioridad3 = false, prioridad4 = false;
+            int liberados = 0;
+            int totalLibres = liberados + cantMarcosLibres;
+            
+            //sacar procesos mientras totalLibres sea menor a num de pag del proc
+            for(int i = 0; (i<256) &&(totalLibres<p.getNumPaginas()); i++){
+                
+                //opcion1, dos bits de ref y mod son 0
+                if(prioridad1 && !memPrincipal[i].getRef() && !memPrincipal[i].getMod()){
+                    int j = 0;
+                    //acomodar en el primer lugar que se encuentre en mem sec
+                    while(memSecundaria[j].getID()!=-1){
+                        j++;
+                    }
+                    memSecundaria[j].setID(memPrincipal[i].getID());
+                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                    marcosLibres.add(i);
+                    memPrincipal[i].setID(-1);
+                    memPrincipal[i].setRef(false);
+                    memPrincipal[i].setMod(false);
+                    liberados++;
+                }//opcion2, bit de ref es 1 y bit de mod es 0
+                else if (prioridad2 && memPrincipal[i].getRef() && !memPrincipal[i].getMod()){
+                    int j = 0;
+                    //acomodar en el primer lugar que se encuentre en mem sec
+                    while(memSecundaria[j].getID()!= -1){
+                        j++;
+                    }
+                    memSecundaria[j].setID(memPrincipal[i].getID());
+                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                    marcosLibres.add(i);
+                    memPrincipal[i].setID(-1);
+                    memPrincipal[i].setRef(false);
+                    memPrincipal[i].setMod(false);
+                    liberados++;                    
+                }//opcion3, bit de ref es 0 y bit de mod es 1
+                else if (prioridad3 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()){
+                    int j = 0;
+                    //acomodar en el primer lugar que se encuentre en mem sec
+                    while(memSecundaria[j].getID()!= -1){
+                        j++;
+                    }
+                    memSecundaria[j].setID(memPrincipal[i].getID());
+                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                    marcosLibres.add(i);
+                    memPrincipal[i].setID(-1);
+                    memPrincipal[i].setRef(false);
+                    memPrincipal[i].setMod(false);
+                    liberados++;
+                }//opcion4, bit de ref es 1 y bit de mod es 1
+                else if (prioridad4 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()){
+                    int j = 0;
+                    //acomodar en el primer lugar que se encuentre en mem sec
+                    while(memSecundaria[j].getID()!= -1){
+                        j++;
+                    }
+                    memSecundaria[j].setID(memPrincipal[i].getID());
+                    memSecundaria[j].setnPag(memPrincipal[i].getnPag());
+                    marcosLibres.add(i);
+                    memPrincipal[i].setID(-1);
+                    memPrincipal[i].setRef(false);
+                    memPrincipal[i].setMod(false);
+                    liberados++;
+                }
+                totalLibres = liberados + cantMarcosLibres;
+                
+                //si no encontro procesos con la mayor prioridad, ir a la sig.
+                //prioridad
+                if(i == 255 && (totalLibres < p.getNumPaginas())){
+                    if(prioridad1){
+                        i=0;
+                        prioridad1 = false;
+                        prioridad2 = true;
+                    }else if (prioridad2){
+                        i=0;
+                        prioridad2 = false;
+                        prioridad3 = true;
+                    }else if (prioridad3) {
+                        i=0;
+                        prioridad3 = false;
+                        prioridad4 = true;
+                    }else{
+                        System.out.println("error, no hay memoria suficiente");
+                        break;
+                    }
+                }
+            }
+             while(marcosLibres.iterator().hasNext()){
+                 
+                int cont; 
+                int pCont = 0;
+                cont = marcosLibres.iterator().next();
+                memPrincipal[cont].setID(p.getId());
+                memPrincipal[cont].setnPag(pCont);
+                pCont++;
+            }
+            
+            //mandar swaps, page fault
             
         }
         

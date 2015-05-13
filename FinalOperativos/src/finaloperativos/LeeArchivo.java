@@ -53,6 +53,7 @@ public class LeeArchivo {
                 switch (word[0]) {
                     case "P":
                         if (checaP()) {
+                            System.out.println(line);
                             Proceso proceso = new Proceso(pId, pTam);
                             p.procP(proceso);
                             lklProcesos.add(proceso);
@@ -60,17 +61,18 @@ public class LeeArchivo {
                         break;
                     case "A":
                         if (checaA()) {
+                            System.out.println(line);
                             p.accesar(direccion, pId, bitMod, lklProcesos);
                         }
                         break;
                     case "L":
                         if (checaL()) {
+                            System.out.println(line);
                             p.liberar(pId, con, lklProcesos);
                         }
                         break;
                     case "F":
                         //reporte
-                        //TU de cada proceso, TU promedio, page fault x proceso, swaps in, swaps out
                         if (line.equals("F")) {
                             con = new Conjunto();
                             //Reporte r = new Reporte();

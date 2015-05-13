@@ -16,7 +16,7 @@ public class Proceso {
     private int numPaginas;
     private int tamano;
     private Pagina[] arrPaginas;
-    private Calendar tiempoLlegada;
+    private Calendar llegada;
     private Calendar terminacion;
     private long turnaround; 
     
@@ -26,7 +26,7 @@ public class Proceso {
     }
 
     public long getTurnaround() {
-        return turnaround;
+        return (llegada.getTimeInMillis() - terminacion.getTimeInMillis());
     }
 
     public Calendar getTerminacion() {
@@ -50,7 +50,7 @@ public class Proceso {
     }
 
     public Calendar getTiempoLlegada() {
-        return tiempoLlegada;
+        return llegada;
     }
 
     public void setId(int id) {
@@ -70,7 +70,7 @@ public class Proceso {
     }
 
     public void setTiempoLlegada(Calendar tiempoLlegada) {
-        this.tiempoLlegada = tiempoLlegada;
+        this.llegada = tiempoLlegada;
     }
 
     public void setTerminacion(Calendar terminacion) {

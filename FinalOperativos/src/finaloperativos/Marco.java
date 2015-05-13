@@ -50,6 +50,8 @@ public class Marco {
         this.ref = ref;
     }
     public void setID(int id){
+        this.mod = false;
+        this.ref = false;
         this.idProceso = id;
     }
     public void setnPag(int pag){

@@ -57,12 +57,17 @@ public class Procedimiento extends FinalOperativos {
                 marcosLibres.add(i);
             }
         }
+        
+        memPrincipal[255].getID();
+        p.getId();
         System.out.println("Se utilizaron los siguientes marcos de pagina: ");
         cabeEnMemPrinc = (cantMarcosLibres >= p.getNumPaginas());
+        int tm = cantMarcosLibres;
 
         if (cabeEnMemPrinc) {
             int cont = 0;
             int pCont = 0;
+            
             for(int i = 0; i < cantMarcosLibres; i++) {
                 //TODO
                 //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
@@ -72,6 +77,7 @@ public class Procedimiento extends FinalOperativos {
                 System.out.print("" + cont + " ");
                 pCont++;
             }
+            marcosLibres.clear();
             System.out.println("");
         } else {
             //SWAPS
@@ -167,15 +173,19 @@ public class Procedimiento extends FinalOperativos {
                 }
             }
             // Mete las paginas a memoria
-            while (marcosLibres.iterator().hasNext()) {
-                int cont;
+            
+            for(int i = 0; i< marcosLibres.size(); i++){
+                int cont = 0;
                 int pCont = 0;
-                cont = marcosLibres.iterator().next();
+                cont = marcosLibres.get(i);
                 memPrincipal[cont].setID(p.getId());
-                memPrincipal[cont].setnPag(pCont);
-                System.out.print("" + cont + " ");
+                memPrincipal[cont].setID(p.getId());
                 pCont++;
+                System.out.print("" + cont + " ");
             }
+            System.out.print("\n");
+            memPrincipal[0].getID();
+            marcosLibres.clear();
         }
     }
 

@@ -118,6 +118,7 @@ public class LeeArchivo {
                             con = new Conjunto();
                             //se reinicializa la variable <p> de tipo Procedimiento
                             p = new Procedimiento();
+                            lklProcesos = new LinkedList();
                         }
                         break;
                         

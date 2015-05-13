@@ -42,7 +42,10 @@ public class Conjunto {
         return cantSwapsOut;
     }
     public long getTurnAroundPromedio() {
+        if(cantProcesosTerminados > 0){
         return this.turnAroundAcum/this.cantProcesosTerminados;
+        }
+        return 0;
     }
     // Agrega 1 a los procesos terminados
     public void ActualCantProcesosTerminados() {

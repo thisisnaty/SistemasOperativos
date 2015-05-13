@@ -1,10 +1,10 @@
-P 4000 1     // Marca errror en cargar el proceso porque es mas de 2048
-F			// Marca que no termino el proceso 1
+P 4000 1 
+F		
 P 10 1      
 A 15 1 0     
 L 1
 F
-Z           // no corre  
+Z        
 F
 A 15 1 0     
 F
@@ -42,8 +42,8 @@ A 1 3 0
 A 1 4 0
 L 3
 L 4
-P 16 5        // Lo debe cargar en los espacios liberados
-A 1 5         // ¿si?
+P 16 5        
+A 1 5       
 L 1
 L 2
 L 3

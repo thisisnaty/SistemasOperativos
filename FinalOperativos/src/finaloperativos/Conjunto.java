@@ -32,8 +32,8 @@ public class Conjunto {
         return cantProcesos;
     }
 
-    public void setCantProcesos(int cantProcesos) {
-        this.cantProcesos = cantProcesos;
+    public void ActualCantProcesos() {
+        this.cantProcesos += 1;
     }
 
     public int getCantPageFaults() {
@@ -65,7 +65,7 @@ public class Conjunto {
     }
 
     public void setTurnAroundAcum(long turnAroundAcum) {
-        this.turnAroundAcum = turnAroundAcum;
+        this.turnAroundAcum += turnAroundAcum;
     }
 
     public long getTurnAroundPromedio() {

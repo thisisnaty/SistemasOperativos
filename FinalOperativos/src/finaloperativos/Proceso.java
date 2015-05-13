@@ -38,7 +38,11 @@ public class Proceso {
     
     // Metodos para obtener los datos del proceso
     public long getTurnaround() {
-        return (tiempoLlegada.getTimeInMillis() - terminacion.getTimeInMillis());
+        if(terminacion != null)
+        {
+            return (tiempoLlegada.getTimeInMillis() - terminacion.getTimeInMillis());
+        }
+        return 0;
     }
     public Calendar getTerminacion() {
         return terminacion;

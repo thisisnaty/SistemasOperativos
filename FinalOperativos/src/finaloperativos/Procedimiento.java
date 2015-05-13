@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class Procedimiento extends FinalOperativos {
 
-    Marco[] memPrincipal;
-    Marco[] memSecundaria;
+    private Marco[] memPrincipal;
+    private Marco[] memSecundaria;
 
     // Crea los arreglos de la memoria
     public Procedimiento() {
@@ -25,6 +25,10 @@ public class Procedimiento extends FinalOperativos {
         memSecundaria = new Marco[512];
         for (int i = 0; i < 256; i++) {
             memPrincipal[i] = new Marco();
+            memSecundaria[i] = new Marco();
+        }
+        
+        for (int i = 256; i <512; i++){
             memSecundaria[i] = new Marco();
         }
     }
@@ -46,6 +50,7 @@ public class Procedimiento extends FinalOperativos {
         }
 
         int cantMarcosLibres = 0;
+
         for (int i = 0; (i < 256) && (cantMarcosLibres < p.getNumPaginas()); i++) {
             if (memPrincipal[i].getID() == -1) {
                 cantMarcosLibres++;
@@ -53,28 +58,28 @@ public class Procedimiento extends FinalOperativos {
             }
         }
         System.out.println("Se utilizaron los siguientes marcos de pagina: ");
-        cabeEnMemPrinc = (cantMarcosLibres >= p.getNumPaginas()) ? true : false;
+        cabeEnMemPrinc = (cantMarcosLibres >= p.getNumPaginas());
 
         if (cabeEnMemPrinc) {
-            int cont;
+            int cont = 0;
             int pCont = 0;
-            while (marcosLibres.iterator().hasNext()) {
+            for(int i = 0; i < cantMarcosLibres; i++) {
                 //TODO
                 //CHECAR QUE EL ITERADOR SI ESTE SACANDO EN ORDEN ASCENDENTE
-                cont = marcosLibres.iterator().next();
+                cont = marcosLibres.get(i);
                 memPrincipal[cont].setID(p.getId());
                 memPrincipal[cont].setnPag(pCont);
                 System.out.print("" + cont + " ");
                 pCont++;
             }
+            System.out.println("");
         } else {
             //SWAPS
             //liberar espacios de memoria en mem principal hasta que haya
             //espacio suficiente
 
             boolean prioridad1 = true, prioridad2 = false, prioridad3 = false, prioridad4 = false;
-            int liberados = 0;
-            int totalLibres = liberados + cantMarcosLibres;
+            int totalLibres = cantMarcosLibres;
 
             //sacar procesos mientras totalLibres sea menor a num de pag del proc
             for (int i = 0; (i < 256) && (totalLibres < p.getNumPaginas()); i++) {
@@ -91,7 +96,7 @@ public class Procedimiento extends FinalOperativos {
                     memPrincipal[i].setID(-1);
                     memPrincipal[i].setRef(false);
                     memPrincipal[i].setMod(false);
-                    liberados++;
+                    totalLibres++;
                     con.setCantSwapsOut();
                 }//opcion2, bit de ref es 1 y bit de mod es 0
                 else if (prioridad2 && memPrincipal[i].getRef() && !memPrincipal[i].getMod()) {
@@ -106,7 +111,7 @@ public class Procedimiento extends FinalOperativos {
                     memPrincipal[i].setID(-1);
                     memPrincipal[i].setRef(false);
                     memPrincipal[i].setMod(false);
-                    liberados++;
+                    totalLibres++;
                     con.setCantSwapsOut();
                 }//opcion3, bit de ref es 0 y bit de mod es 1
                 else if (prioridad3 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
@@ -121,7 +126,7 @@ public class Procedimiento extends FinalOperativos {
                     memPrincipal[i].setID(-1);
                     memPrincipal[i].setRef(false);
                     memPrincipal[i].setMod(false);
-                    liberados++;
+                    totalLibres++;
                     con.setCantSwapsOut();
                 }//opcion4, bit de ref es 1 y bit de mod es 1
                 else if (prioridad4 && !memPrincipal[i].getRef() && memPrincipal[i].getMod()) {
@@ -136,10 +141,9 @@ public class Procedimiento extends FinalOperativos {
                     memPrincipal[i].setID(-1);
                     memPrincipal[i].setRef(false);
                     memPrincipal[i].setMod(false);
-                    liberados++;
+                    totalLibres++;
                     con.setCantSwapsOut();
                 }
-                totalLibres = liberados + cantMarcosLibres;
 
                 //si no encontro procesos con la mayor prioridad, ir a la sig.
                 //prioridad
@@ -216,7 +220,7 @@ public class Procedimiento extends FinalOperativos {
             actual.getTime();
 
             // Calcula el turnarround
-            long turnarround = (llegada.getTimeInMillis() - actual.getTimeInMillis());
+            long turnarround = (actual.getTimeInMillis() - llegada.getTimeInMillis());
             lklProcesos.get(index).setTerminacion(actual);
             con.ActualCantProcesosTerminados();
             con.setTurnAroundAcum(turnarround);
@@ -225,7 +229,7 @@ public class Procedimiento extends FinalOperativos {
             // Principal y secundaria y borra el ID si es del
             // Proceso
             System.out.print("Se liberaron los marcos: ");
-            for (int i = 0; i < 2048; i += 8) {
+            for (int i = 0; i < 256; i ++) {
                 if (memPrincipal[i].getID() == id) {
                     memPrincipal[i].setID(-1);
                     System.out.print("" + i + " ");
@@ -240,7 +244,7 @@ public class Procedimiento extends FinalOperativos {
 
             // Checa las 2048 localidades faltantes de memoria
             // Secundaria
-            for (int i = 2048; i < 4096; i += 8) {
+            for (int i = 256; i < 512; i++) {
                 if (memSecundaria[i].getID() == id) {
                     memSecundaria[i].setID(-1);
                 }
@@ -278,7 +282,7 @@ public class Procedimiento extends FinalOperativos {
     }
 
     public void accesar(int direccion, int id, boolean modificacion, LinkedList<Proceso> listaProcesos, Conjunto con) {
-        int numeroPagina;//dice el numero de paginas
+       /* int numeroPagina;//dice el numero de paginas
         int marco = 0;
         boolean estaPrincipal;//dice si la pagina esta en memoria principal o no
         boolean estaVacio;//dice si hay un espacio vacio en la memoria principal
@@ -491,6 +495,6 @@ public class Procedimiento extends FinalOperativos {
                 } else {
                     memPrincipal[marco].setRef(true);
                 }
-        }
+        }*/
     }
 }

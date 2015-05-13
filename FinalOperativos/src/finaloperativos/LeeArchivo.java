@@ -1,4 +1,3 @@
-
 /*
     Lee el archivo y va llamando al metodo que se necesita,
     checa las instrucciones para ver que sean correctas.
@@ -119,6 +118,7 @@ public class LeeArchivo {
                             con = new Conjunto();
                             //se reinicializa la variable <p> de tipo Procedimiento
                             p = new Procedimiento();
+                            lklProcesos = new LinkedList();
                         }
                         break;
                         

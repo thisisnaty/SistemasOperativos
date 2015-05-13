@@ -112,7 +112,7 @@ public class LeeArchivo {
                         //se checa que la instruccion sea valida
                         if (line.equals("F")) {
                             //se imprime la instruccion
-                            System.out.println("Fin");
+                            System.out.println("F");
                             //se llama a la funcion que le corresponde en procedimiento;
                             p.fin(lklProcesos, con);
                             //se reinicializa la variable <con> de tipo Conjunto

@@ -86,6 +86,7 @@ public class Procedimiento extends FinalOperativos{
                     memPrincipal[i].setRef(false);
                     memPrincipal[i].setMod(false);
                     liberados++;
+                    con.setCantSwapsOut();
                 }//opcion2, bit de ref es 1 y bit de mod es 0
                 else if (prioridad2 && memPrincipal[i].getRef() && !memPrincipal[i].getMod()){
                     int j = 0;

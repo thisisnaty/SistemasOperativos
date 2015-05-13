@@ -22,8 +22,8 @@ import java.util.List;
  */
 public class Procedimiento extends FinalOperativos{
      
-    int[] memPrincipal = new int[2048];
-    int[] memSecundaria = new int[4096];
+    Marco[] memPrincipal = new Marco[256];
+    Marco[] memSecundaria = new Marco[512];
     
     public Procedimiento() {
         
@@ -70,6 +70,8 @@ public class Procedimiento extends FinalOperativos{
         
         // Variable que guarda el tiempo de llegada del proceso
         Calendar llegada = null;
+        // Variable que guarda el proceso con ese id
+        Proceso p = null;
         
         // Variable que guarda el tiempo actual
         Calendar actual = Calendar.getInstance();
@@ -77,7 +79,7 @@ public class Procedimiento extends FinalOperativos{
         
         // Obtiene el tiempo de llegada del proceso
         for(Object objProceso: lklProcesos) {
-            Proceso p = (Proceso) objProceso;
+            p = (Proceso) objProceso;
             if (p.getId() == id) {
                 llegada = p.getTiempoLlegada();
             }
@@ -90,20 +92,20 @@ public class Procedimiento extends FinalOperativos{
         // Principal y secundaria y borra el ID si es del
         // Proceso
         for (int i = 0; i < 2048; i += 8){
-            if (memPrincipal[i] == id){
-                memPrincipal[i] = -1;
+            if (memPrincipal[i].getID() == id){
+                memPrincipal[i].setID(-1);
             }
             
-            if (memSecundaria[i] == id){
-                memSecundaria[i] = -1;
+            if (memSecundaria[i].getID() == id){
+                memSecundaria[i].setID(-1);
             }
         }
         
         // Checa las 2048 localidades faltantes de memoria
         // Secundaria
         for (int i = 2048; i < 4096; i += 8){
-            if (memSecundaria[i] == id){
-                memSecundaria[i] = -1;
+            if (memSecundaria[i].getID() == id){
+                memSecundaria[i].setID(-1);
             }    
         }  
     }

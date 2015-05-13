@@ -80,7 +80,7 @@ public class Procedimiento extends FinalOperativos{
         // Obtiene el tiempo de llegada del proceso
         for(Object objProceso: lklProcesos) {
             Proceso p = (Proceso) objProceso;
-            if (p.getId() == id && p.getTurnaround() == 0) {
+            if (p.getId() == id && p.getTerminacion() == null) {
                 proceso = true;
             }
         }
@@ -109,7 +109,7 @@ public class Procedimiento extends FinalOperativos{
             // Calcula el turnarround
             long turnarround = (llegada.getTimeInMillis() - actual.getTimeInMillis());
             lklProcesos.get(index).setTurnaround(turnarround);
-            con.ActualCantProcesos();
+            con.ActualCantProcesosTerminados();
             con.setTurnAroundAcum(turnarround);
         
             // Checa las primeras 2048 localidades de memoria
@@ -137,6 +137,10 @@ public class Procedimiento extends FinalOperativos{
                 }    
             }  
         }
+    }
+    
+    public void fin(LinkedList <Proceso> lklProcesos, Conjunto con){
+        
     }
     
     public void accesar(int direccion, int id, boolean mod, LinkedList<Proceso> listaProcesos){

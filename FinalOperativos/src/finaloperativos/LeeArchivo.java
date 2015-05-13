@@ -1,7 +1,6 @@
 /*
-* To change this license header, choose License Headers in Project Properties.
-* To change this template file, choose Tools | Templates
-* and open the template in the editor.
+    Lee el archivo y va llamando al metodo que se necesita,
+    checa las instrucciones para ver que sean correctas.
 */
 package finaloperativos;
 
@@ -15,17 +14,22 @@ import java.util.Scanner;
  * @author nataliagarcia
  */
 public class LeeArchivo {
+    // Variable que tiene la memoria y los metodos proceso, acceso, liberar
     Procedimiento p;
+    // Variables para la lectura del archivo
     String nombreArchivo;
     Scanner scan;
     Scanner scan2;
-    LinkedList<Proceso> lklProcesos;
     int pId;
     int pTam;
     String line;
     String[] word;
     int direccion;
     boolean bitMod;
+    // Lista encadenada que va a tener todos los procesos
+    LinkedList<Proceso> lklProcesos;
+    // Guarda la informacion del conjunto de instrucciones
+    // Turnarround, num de swaps in y out, page faults
     Conjunto con;
     
     public LeeArchivo (String nombreArchivo) {

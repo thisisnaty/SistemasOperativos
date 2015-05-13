@@ -49,7 +49,7 @@ public class Marco {
     public void setRef(boolean ref){
         this.ref = ref;
     }
-    public void setId(int id){
+    public void setID(int id){
         this.idProceso = id;
     }
     public void setnPag(int pag){

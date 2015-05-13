@@ -124,6 +124,7 @@ public class LeeArchivo {
                         
                         //la palabra E es valida
                     case "E":
+                        System.out.println("Termino");
                         break;
                         
                         //si la palabra no es igual a ninguna de las anteriores, se marca un error

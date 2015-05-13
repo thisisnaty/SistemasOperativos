@@ -40,7 +40,7 @@ public class Proceso {
     public long getTurnaround() {
         if(terminacion != null)
         {
-            return (tiempoLlegada.getTimeInMillis() - terminacion.getTimeInMillis());
+            return (terminacion.getTimeInMillis() - tiempoLlegada.getTimeInMillis());
         }
         return 0;
     }

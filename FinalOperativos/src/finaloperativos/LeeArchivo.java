@@ -85,7 +85,6 @@ public class LeeArchivo {
                         
                     //si la primera palabra es A
                     case "A":
-                        
                         //se checa que la instruccion sea valida
                         if (checaA()) {
                             //se imprime la instruccion
@@ -225,7 +224,7 @@ public class LeeArchivo {
         }
         
         try {
-            switch (word[2]) {
+            switch (word[3]) {
                 case "0":
                     bitMod = false;
                     break;
@@ -233,6 +232,7 @@ public class LeeArchivo {
                     bitMod = true;
                     break;
                 default:
+                    System.out.println("ERROR");
                     return false;
             }
         } 

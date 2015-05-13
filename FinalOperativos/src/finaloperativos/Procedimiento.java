@@ -278,11 +278,11 @@ public class Procedimiento extends FinalOperativos {
         System.out.println("Page faults: " + con.getCantPageFaults());
         System.out.println("Swap ins: " + con.getCantSwapsIn());
         System.out.println("Swap out: " + con.getCantSwapsOut());
-        System.out.println("Turnarround promedio: " + con.getTurnAroundPromedio());
+        System.out.println("Turnarround promedio: " + con.getTurnAroundPromedio() + "ms");
     }
 
     public void accesar(int direccion, int id, boolean modificacion, LinkedList<Proceso> listaProcesos, Conjunto con) {
-       /* int numeroPagina;//dice el numero de paginas
+       int numeroPagina;//dice el numero de paginas
         int marco = 0;
         boolean estaPrincipal;//dice si la pagina esta en memoria principal o no
         boolean estaVacio;//dice si hay un espacio vacio en la memoria principal
@@ -297,22 +297,30 @@ public class Procedimiento extends FinalOperativos {
         estaPrincipal = false;//incializacion
         estaVacio = false;//incializacion
         numeroPagina = (direccion / 8);//incializacion
+        
+        for (Object objProceso : listaProcesos) {
+            Proceso p = (Proceso) objProceso;
+            if(p.getId() == id){
+            if (direccion >= p.getTamano()) {
+                System.out.println("ERROR - Direccion invalida");
+            }
+           
+        else{
         for (int i = 0; i < 256; i++) {//checo si la pagina esta en memoria principal
-            if (id == memPrincipal[i].getID() && memPrincipal[i].getnPag() == numeroPagina) {
-
-                estaPrincipal = true;
+            if (memPrincipal[i].getnPag() == numeroPagina && id == memPrincipal[i].getID()) {
 
                 if (modificacion) {
                     memPrincipal[i].setMod(true);
                 } else {
                     memPrincipal[i].setRef(true);
+                
+                estaPrincipal = true;
                 }
-                i = 256;
+                
+                System.out.println("Direccion virtual: " + direccion);
+                int direccionReal = (direccion % 8) + (i * 8);
+                System.out.println("Direccion real: " + direccionReal);
             }
-
-            System.out.println("Direccion virtual: " + direccion);
-            int direccionReal = (direccion % 8) + i * 8;
-            System.out.println("Direccion real: " + direccionReal);
         }
 
         if (!estaPrincipal) {//verifico que no esta en memoria principal si no en secundaria
@@ -495,6 +503,9 @@ public class Procedimiento extends FinalOperativos {
                 } else {
                     memPrincipal[marco].setRef(true);
                 }
-        }*/
+        }
+    }
+    }
+    }
     }
 }

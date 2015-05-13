@@ -18,6 +18,7 @@ public class Proceso {
     private Pagina[] arrPaginas;
     private Calendar tiempoLlegada;
     private long turnaround;
+    private Calendar terminacion;
     
     public Proceso(int id, int tamano) {
         this.id = id;
@@ -32,12 +33,18 @@ public class Proceso {
         this.tiempoLlegada = Calendar.getInstance();
         this.tiempoLlegada.getTime();
         this.turnaround = 0;
+        this.terminacion = null;
     }
     
     // Metodos para obtener los datos del proceso
     public long getTurnaround() {
         return turnaround;
     }
+    
+    public Calendar getTerminacion() {
+        return terminacion;
+    }
+
     public int getId() {
         return id;
     }
@@ -57,5 +64,29 @@ public class Proceso {
     // Metodos para modificar los datos del proceso
     public void setTurnaround(long turnaround) {
         this.turnaround = turnaround;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setNumPaginas(int numPaginas) {
+        this.numPaginas = numPaginas;
+    }
+
+    public void setTamano(int tamano) {
+        this.tamano = tamano;
+    }
+
+    public void setArrPaginas(Pagina[] arrPaginas) {
+        this.arrPaginas = arrPaginas;
+    }
+
+    public void setTiempoLlegada(Calendar tiempoLlegada) {
+        this.tiempoLlegada = tiempoLlegada;
+    }
+
+    public void setTerminacion(Calendar terminacion) {
+        this.terminacion = terminacion;
     }
 }

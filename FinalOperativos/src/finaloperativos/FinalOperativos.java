@@ -20,6 +20,7 @@ public class FinalOperativos {
     public static void main(String[] args) throws IOException {
         
         // Crea un objeto encargado de leer el archivo de texto
-        new LeeArchivo("Pruebas.txt");
+        LeeArchivo x = new LeeArchivo("Pruebas.txt");
+        x.leer();
     }
 }

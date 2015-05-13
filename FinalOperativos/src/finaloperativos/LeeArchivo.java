@@ -137,14 +137,15 @@ public class LeeArchivo {
         }
         
         try {
-            if (word[2].equals("0")) {
-                bitMod = false;
-            }
-            else if (word[2].equals("1")) {
-                bitMod = true;
-            }
-            else {
-                return false;
+            switch (word[2]) {
+                case "0":
+                    bitMod = false;
+                    break;
+                case "1":
+                    bitMod = true;
+                    break;
+                default:
+                    return false;
             }
         } catch(NumberFormatException e) {
             System.out.println("Operacion invalida, no es un numero (direccion)");

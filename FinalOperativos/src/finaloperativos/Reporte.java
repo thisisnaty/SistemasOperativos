@@ -11,6 +11,4 @@ package finaloperativos;
  */
 public class Reporte {
     
-    
-    
 }

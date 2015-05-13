@@ -77,13 +77,13 @@ public class Procedimiento extends FinalOperativos{
         boolean proceso = false;
         
         // Checa si el proceso existe y si sigue vivo
+        // Obtiene el tiempo de llegada del proceso
         for(Object objProceso: lklProcesos) {
             Proceso p = (Proceso) objProceso;
             if (p.getId() == id && p.getTurnaround() == 0) {
                 proceso = true;
             }
         }
-        
         // Si existe el proceso lo libera
         if(proceso){
             // Variable que guarda el tiempo de llegada del proceso

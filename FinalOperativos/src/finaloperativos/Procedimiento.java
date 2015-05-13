@@ -16,8 +16,8 @@ import java.util.List;
  */
 public class Procedimiento extends FinalOperativos {
 
-    Marco[] memPrincipal;
-    Marco[] memSecundaria;
+    private Marco[] memPrincipal;
+    private Marco[] memSecundaria;
 
     // Crea los arreglos de la memoria
     public Procedimiento() {
@@ -33,8 +33,8 @@ public class Procedimiento extends FinalOperativos {
 
         //p.setTiempoLlegada(cal.getTime());
         boolean cabeEnMemPrinc = false;
-        List<Integer> marcosLibres = new ArrayList<Integer>();
-        List<Integer> marcosLibresMemSec = new ArrayList<Integer>();
+        List<Integer> marcosLibres = new ArrayList<>();
+        List<Integer> marcosLibresMemSec = new ArrayList<>();
 
         if (p.getTamano() % 8 != 0) {
             p.setNumPaginas((p.getTamano() / 8) + 1);
@@ -43,6 +43,7 @@ public class Procedimiento extends FinalOperativos {
         }
 
         int cantMarcosLibres = 0;
+
         for (int i = 0; (i < 256) && (cantMarcosLibres < p.getNumPaginas()); i++) {
             if (memPrincipal[i].getID() == -1) {
                 cantMarcosLibres++;
